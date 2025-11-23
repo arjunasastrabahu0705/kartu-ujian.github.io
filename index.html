@@ -5,34 +5,153 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Kartu Login — SMAN 1 WARUNGGUNUNG</title>
 <link rel="stylesheet" href="style.css">
+<style>
+  /* Styling form login keren & responsif */
+  #loginForm {
+    max-width: 320px;
+    margin: 5vh auto;
+    padding: 2em;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    transition: transform 0.3s ease;
+  }
+  #loginForm:hover {
+    transform: scale(1.05);
+  }
+  #loginForm h2 {
+    margin-bottom: 1em;
+    text-align: center;
+    font-weight: 700;
+  }
+  #loginForm input {
+    width: 100%;
+    padding: 0.75em 1em;
+    margin-bottom: 1em;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    outline: none;
+    box-shadow: inset 0 0 5px rgba(255,255,255,0.3);
+    transition: box-shadow 0.3s ease;
+  }
+  #loginForm input:focus {
+    box-shadow: inset 0 0 10px rgba(255,255,255,0.8);
+  }
+  #btnLogin {
+    width: 100%;
+    padding: 0.75em;
+    font-size: 1.1em;
+    font-weight: 700;
+    background-color: #ff4081;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  #btnLogin:hover {
+    background-color: #e73370;
+  }
+  #loginError {
+    color: #ff6f91;
+    margin-bottom: 1em;
+    text-align: center;
+    font-weight: 600;
+    display: none;
+  }
+  /* Aplikasi utama awalnya disembunyikan */
+  #appArea { display: none; }
+  /* Responsive */
+  @media (max-width: 400px) {
+    #loginForm {
+      margin: 10vh 1em;
+      padding: 1.5em;
+    }
+  }
+</style>
 </head>
 <body>
 
-<!-- ============================================================
-     UI (hilang saat print)
-============================================================ -->
-<header class="topbar no-print">
-  <div><strong>Kartu Login — SMAN 1 WARUNGGUNUNG</strong></div>
+<!-- Form Login -->
+<div id="loginForm">
+  <h2>Login Admin</h2>
+  <div id="loginError">Username atau password salah!</div>
+  <input type="text" id="username" placeholder="Username" autofocus />
+  <input type="password" id="password" placeholder="Password" />
+  <button id="btnLogin">Login</button>
+</div>
 
-  <div class="actions">
-    <input id="gasUrl" type="text" placeholder="GAS Web App URL (opsional)" />
-    <select id="selectKelas">
-      <option value="">Semua Kelas</option>
-      <option value="X">X</option>
-      <option value="XI">XI</option>
-      <option value="XII">XII</option>
-    </select>
-    <button id="btnLoad">Muat Data</button>
-    <button id="btnPrint">Cetak / PDF</button>
-  </div>
-</header>
+<!-- Aplikasi utama -->
+<div id="appArea">
+  <header class="topbar no-print">
+    <div><strong>Kartu Login — SMAN 1 WARUNGGUNUNG</strong></div>
+    <div class="actions">
+      <input id="gasUrl" type="text" placeholder="GAS Web App URL (opsional)" />
+      <select id="selectKelas">
+        <option value="">Semua Kelas</option>
+        <option value="X">X</option>
+        <option value="XI">XI</option>
+        <option value="XII">XII</option>
+      </select>
+      <button id="btnLoad">Muat Data</button>
+      <button id="btnPrint">Cetak / PDF</button>
+      <button id="btnLogout">Logout</button>
+    </div>
+  </header>
 
-<!-- ============================================================
-     PREVIEW AREA
-============================================================ -->
-<main class="container">
-  <div id="previewArea" class="preview-area"></div>
-</main>
+  <main class="container">
+    <div id="previewArea" class="preview-area"></div>
+  </main>
+</div>
+
 <script src="app.js"></script>
+<script>
+  (function() {
+    const loginForm = document.getElementById('loginForm');
+    const appArea = document.getElementById('appArea');
+    const loginError = document.getElementById('loginError');
+    const btnLogin = document.getElementById('btnLogin');
+    const btnLogout = document.getElementById('btnLogout');
+
+    // Cek sessionStorage apakah sudah login
+    function checkLogin() {
+      if (sessionStorage.getItem('isLoggedIn') === 'true') {
+        loginForm.style.display = 'none';
+        appArea.style.display = 'block';
+      } else {
+        loginForm.style.display = 'block';
+        appArea.style.display = 'none';
+      }
+    }
+
+    // Validasi login
+    btnLogin.onclick = function() {
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value;
+
+      // Username dan password statis
+      if (username === 'admin' && password === 'Admin123456!') {
+        sessionStorage.setItem('isLoggedIn', 'true');
+        loginError.style.display = 'none';
+        checkLogin();
+      } else {
+        loginError.style.display = 'block';
+      }
+    };
+
+    // Logout
+    btnLogout.onclick = function() {
+      sessionStorage.removeItem('isLoggedIn');
+      checkLogin();
+    };
+
+    // Saat halaman load, cek status login
+    checkLogin();
+  })();
+</script>
+
 </body>
 </html>
