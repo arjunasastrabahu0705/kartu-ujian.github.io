@@ -1,123 +1,167 @@
-/* style.css — modern, responsive, print-friendly */
-
-/* --- UI --- */
+/* ============================================================
+   GLOBAL
+============================================================ */
 :root{
-  --primary: #0b57d0;
-  --muted: #6b7280;
-  --card-bg: #ffffff;
+  --gap: 3mm;
   --paper-width: 210mm;
+  --paper-height: 297mm;
 }
-*{box-sizing:border-box}
+
+* { box-sizing: border-box; }
+
 body{
-  font-family: Inter, Roboto, system-ui, Arial, sans-serif;
   margin:0;
-  background:#f3f4f6;
-  color:#111827;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background:white;
 }
+
+/* ============================================================
+   TOPBAR UI (otomatis hilang saat print)
+============================================================ */
 .topbar{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:12px 16px;
-  background:linear-gradient(90deg,var(--primary),#2563eb);
+  background:#0b57d0;
   color:white;
+  padding:12px 18px;
 }
-.brand{
+.actions{
   display:flex;
-  gap:12px;
+  gap:8px;
+}
+.actions input,
+.actions select{
+  padding:6px;
+}
+.actions button{
+  padding:6px 12px;
+  cursor:pointer;
+}
+
+/* ============================================================
+   PREVIEW AREA
+============================================================ */
+.print-area{
+  width: 210mm;
+  margin: 0 auto;
+  }
+
+
+/* ============================================================
+   PAGE A4
+============================================================ */
+.page {
+    width: 210mm;
+    height: 297mm;
+    padding: 6mm;
+    box-sizing: border-box;
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 90mm);  /* FIXED HEIGHT – SUPER AMAN */
+    gap: 4mm 5mm;
+
+    page-break-after: always;
+    overflow: hidden;
+  }
+
+/* ============================================================
+   CARD
+============================================================ */
+.card {
+    border: 1px solid #777;
+    border-radius: 5px;
+    padding: 4mm;
+    box-sizing: border-box;
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+  }
+
+/* HEADER */
+.header{
+  display:flex;
+  justify-content:space-between;
   align-items:center;
 }
-.brand-thumb{
-  width:48px;height:48px;object-fit:cover;border-radius:6px;background:#fff;padding:6px;
+.header img{
+  width:36px;
+  height:36px;
+  object-fit:contain;
 }
-.brand h1{font-size:18px;margin:0}
-.brand .muted{margin:0;font-size:12px;opacity:0.9}
-.actions{display:flex;gap:8px;align-items:center}
-.actions input{padding:8px;border-radius:6px;border:0;min-width:380px}
-.actions button{padding:8px 12px;border-radius:6px;border:0;cursor:pointer}
-button.primary{background:#06f;color:#fff}
+.header-text{
+  width:100%;
+  text-align:center;
+  font-size:12px;
+}
+.header-line{
+  width:100%;
+  height:1px;
+  background:black;
+  margin-top:3mm;
+}
 
-/* --- container & preview --- */
-.container{padding:18px}
-.preview-area{
-  background:transparent;
-  border-radius:8px;
-  min-height:60vh;
-  padding:10px;
+/* BIODATA */
+.biodata{
+  margin-top:3mm;
+  font-weight:bold;
+}
+.biodata .row{
   display:flex;
+  margin-bottom:2px;
+}
+.label{ width:35%; font-weight:bold; }
+.value{ width:65%; }
+
+/* FOOTER */
+.footer{
+  display:flex;
+  align-items:flex-start;
+  margin-top:auto;
+}
+.foto{
+  width:27mm;
+  height:30mm;
+  border:1px solid #aaa;
+  display:flex;
+  align-items:center;
   justify-content:center;
+  margin-right:4mm;
+  font-size:10px;
+}
+.foto img{
+  width:92%;
+  height:92%;
+  object-fit:cover;
 }
 
-/* print-area wrapper uses mm sizes */
-.print-area{ width: var(--paper-width); }
-
-/* A4 page grid (reused from earlier) */
-.page {
-  width: 210mm;
-  height: 297mm;
-  padding: 6mm;
-  box-sizing: border-box;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(3, 90mm);  /* safe height */
-  gap: 4mm 6mm;  /* vertical 4mm, horizontal 6mm */
-  page-break-after: always;
-  background: white;
-  border-radius:6px;
+.ttd{
+  height:30mm;
+  display:flex;
+  flex-direction:column;
+}
+.spacer{
+  flex-grow:1;
+  margin-bottom:1mm;
+}
+.nama-kepsek{
+  font-weight:bold;
+}
+.nip{
+  margin-top:1mm;
+}
+.bottom-line{
+  width:100%;
+  height:1px;
+  background:black;
+  margin-top:2mm;
 }
 
-/* card inside page */
-.card {
-  border: 1px solid #d1d5db;
-  border-radius: 6px;
-  padding: 6px;
-  box-sizing: border-box;
-  font-size: 12px;
-  display:flex;flex-direction:column;
-  background: linear-gradient(180deg,#fff,#fbfdff);
-}
-
-/* header */
-.card .header{display:flex;align-items:center;justify-content:space-between}
-.card .header img{width:34px;height:34px;object-fit:contain}
-.header-text{font-size:12px;text-align:center; width:100%}
-
-/* header line */
-.header-line{margin-top:3mm;width:100%;height:1px;background:#111}
-
-/* biodata */
-.biodata{margin-top:3mm}
-.biodata .row{display:flex;margin-bottom:2px}
-.label{width:35%;font-weight:700}
-.value{width:65%}
-
-/* footer: foto + ttd */
-.footer{display:flex;align-items:flex-start;margin-top:auto}
-.foto{width:27mm;height:30mm;border:1px solid #ccc;display:flex;align-items:center;justify-content:center;margin-right:6px}
-.foto img{width:92%;height:92%;object-fit:cover}
-.ttd{height:30mm;display:flex;flex-direction:column}
-.spacer{flex-grow:1;margin-bottom:0.5mm}
-.nama-kepsek{font-weight:600;margin-bottom:-0.6mm}
-.nip{font-size:11px}
-
-/* bottom line 2mm */
-.bottom-line{width:100%;height:1px;background:#000;margin-top:2mm}
-
-/* responsive */
-@media (max-width:900px){
-  .actions input{min-width:180px}
-  .preview-area{padding:6px}
-  .page{transform:scale(0.7);transform-origin:top center}
-}
-
-/* print rules — hide UI, show only pages */
-@media print{
-  body *{visibility:hidden}
-  .page, .page *{visibility:visible}
-  .page { page-break-after: always; margin:0; box-shadow:none; transform:none; }
-  .page { width:210mm; height:297mm; }
-  /* remove round corners & extra styling for accurate print */
-  .page{ border-radius:0; box-shadow:none }
-}
-
-
+/* ============================================================
+   PRINT MODE FIX — hanya kartu yang tampil
+============================================================ */
+@media print {
+    .no-print { display: none; }
+  }
