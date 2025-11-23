@@ -143,10 +143,13 @@
     };
 
     // Logout
-    btnLogout.onclick = function() {
-      sessionStorage.removeItem('isLoggedIn');
-      checkLogin();
-    };
+   btnLogout.onclick = function() {
+  sessionStorage.removeItem('isLoggedIn');
+  document.getElementById('username').value = '';
+  document.getElementById('password').value = '';
+  loginError.style.display = 'none'; // sembunyikan error jika ada
+  checkLogin();
+  };
 
     // Saat halaman load, cek status login
     checkLogin();
@@ -155,3 +158,4 @@
 
 </body>
 </html>
+
