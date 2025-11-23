@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Kartu Login — SMAN 1 Warunggunung</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <img src="/mnt/data/kartu.pdf" alt="template" class="brand-thumb"> <!-- contoh file upload path -->
+      <div>
+        <h1>Kartu Login — SMAN 1 Warunggunung</h1>
+        <p class="muted">Cetak A4 — 2 kolom × 3 baris</p>
+      </div>
+    </div>
+
+    <div class="actions">
+	<input id="gasUrl" type="text" placeholder="GAS Web App URL" />
+	<select id="selectKelas">
+    <option value="">Semua Kelas</option>
+    <option value="X-1">X-1</option>
+    <option value="X-2">X-2</option>
+    <option value="XI-1">XI-1</option>
+    <option value="XI-2">XI-2</option>
+    <option value="XII-1">XII-1</option>
+    <option value="XII-2">XII-2</option>
+	</select>
+		<button id="btnLoad">Muat Data</button>
+		<button id="btnPrint" class="primary">Cetak / Export PDF</button>
+	</div>
+
+  </header>
+
+  <main class="container">
+    <section class="controls">
+      <label>Preview / Atur sebelum cetak</label>
+    </section>
+
+    <section id="previewArea" class="preview-area">
+      <!-- pages akan dirender di sini -->
+    </section>
+
+    <footer class="footer-note">
+      <small>Hosted static frontend — data via Google Apps Script Web App (JSON/JSONP).</small>
+    </footer>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
