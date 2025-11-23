@@ -108,7 +108,10 @@ button.primary{background:#06f;color:#fff}
 @media (max-width:900px){
   .actions input{min-width:180px}
   .preview-area{padding:6px}
-  .page{transform:scale(0.7);transform-origin:top center}
+  .page {
+    transform: none !important;
+    transform-origin: initial !important;
+  }
 }
 
 /* print rules — hide UI, show only pages */
@@ -120,3 +123,4 @@ button.primary{background:#06f;color:#fff}
   /* remove round corners & extra styling for accurate print */
   .page{ border-radius:0; box-shadow:none }
 }
+
