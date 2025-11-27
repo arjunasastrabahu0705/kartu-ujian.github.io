@@ -62,7 +62,7 @@ function buildCard(d){
     <div class="footer">
       <div class="foto">${d.foto ? `<img src="${d.foto}">` : "FOTO"}</div>
       <div class="ttd">
-        <div>Warunggunung, 1 Desember 2025</div>
+        <div>Warunggunung, 28 Nopember 2025</div>
         <div class="spacer"></div>
         <div class="nama-kepsek">Drs. H. Bambang Wiratmo, M.Pd</div>
         <div class="nip">NIP. 196511201991111001</div>
@@ -102,3 +102,4 @@ function renderPages(items) {
 
   previewArea.appendChild(wrap);
 }
+
